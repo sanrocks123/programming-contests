@@ -1,0 +1,60 @@
+ public int length(IntList L) {
+        IntList temp = L;
+        int count = 0;
+        while (temp.next != null) {
+            count++;
+            temp = temp.next;
+        }
+        return count;
+    }
+
+    public String solution(String S, String T) {
+
+        char[] sArr = S.toCharArray();
+        char[] tArr = T.toCharArray();
+        String result = "IMPOSSIBLE";
+
+        if (S.equals(T)) {
+            result = "NOTHING";
+
+        } else if ((T.length() - S.length()) == 1) {
+            int i = 0, j = 0;
+            while (i < T.length()) {
+                if (tArr[i] != sArr[j]) {
+                    result = "INSERT " + String.valueOf(tArr[i]);
+                    i++;
+                } else {
+                    i++;
+                    j++;
+                }
+            }
+
+        } else if ((S.length() - T.length()) == 1) {
+            int i = 0, j = 0;
+            while (i < S.length()) {
+                if (sArr[i] != tArr[j]) {
+                    result = "DELETE " + String.valueOf(sArr[i]);
+                    i++;
+                } else {
+                    i++;
+                    j++;
+                }
+            }
+        } else if (S.length() == T.length()) {
+            int i = 0;
+            while (i < S.length()) {
+                if (sArr[i] != tArr[i]) {
+                    int m = i + 1;
+                    if (sArr[i] == tArr[m] && sArr[m] == tArr[i]) {
+                        result = "SWAP " + String.valueOf(sArr[i]) + " " + String.valueOf(sArr[m]);
+                    }
+                    i++;
+
+                } else {
+                    i++;
+                }
+            }
+
+        }
+        return result;
+    }
